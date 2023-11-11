@@ -1,20 +1,6 @@
-let myBooks = [ {
-    title: "A",
-    author: "author A",
-    pages: "123",
-    status: "unread"
-},
-{
-    title: "B",
-    author: "author B",
-    pages: "456",
-    status: "unread"
-}
-];
-
 class Book {
-    constructor(name, author, pages, status) {
-        this.name = name;
+    constructor(title, author, pages, status) {
+        this.title = title;
         this.author = author;
         this.pages = pages;
         this.status = status;
@@ -36,9 +22,7 @@ class Storage {
 
     static removeBook(bookTitle) {
         let books = Storage.getBooks();
-        console.log(books);
         books = books.filter(book => book.title != bookTitle);
-        console.log(books)
         localStorage.setItem('books', JSON.stringify(books));
     }
 
@@ -148,7 +132,7 @@ class UI {
         if(!elem.classList.contains('read-status')) return;
         const bookTitle = elem.parentElement.parentElement.children[0].textContent;
         const bookStatus = elem.parentElement.children[0].textContent;
-        console.log(elem.parentElement.children[0].textContent);
+
         if(bookStatus === "Read") {
             elem.textContent = "Not read";
             elem.parentElement.parentElement.children[4].textContent = "In Progress";
@@ -160,6 +144,11 @@ class UI {
             Storage.updateBookStatus(bookTitle, true);
         }        
     }
+
+    static clearFields(){
+        const form = document.querySelectorAll('input');
+        form.forEach(el => el.type != 'checkbox' ? el.value = '' : el.checked = false);
+    }
 }
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -170,4 +159,19 @@ document.querySelector('#try-books').addEventListener('click', (e) => UI.tryBook
 document.querySelector('.main').addEventListener('click', (e)=> {
     UI.removeBook(e.target);
     UI.updateBookStatus(e.target);
+});
+document.querySelector('#book-form').addEventListener('submit', (e) => {
+    e.preventDefault();
+
+    const title = document.querySelector('#title').value;
+    const author = document.querySelector('#author').value;
+    const pages = document.querySelector('#pages').value;
+    const submitBtn = document.querySelector('#submit-btn');
+    const status = document.querySelector('#status-checkbox').checked;
+    const book = new Book(title, author, pages, status);
+    
+    UI.addBookToLibrary(book);
+    Storage.addBook(book);
+
+    UI.clearFields();
 });
