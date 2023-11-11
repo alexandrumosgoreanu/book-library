@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Library</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="script.js" defer></script>
+</head>
+<body>
+    <div class="header">
+        <h1>Book Library</h1>
+        <img src="images/book.svg" alt="book logo">
+    </div>
+
+    <button id="add-book" title="Add book">
+        <img src="images/plus.svg" alt="plus sign">
+    </button>
+ 
+    <div class="main" id="main">
+        <div class="book-card tips active" id="tips">
+            <h2>The library is empty !</h2>
+            <p>Click the "<strong>+</strong>" button to add a new book</p>
+            <p>-- (OR) --</p>
+            <button class="book-button" id="try-books">Try some books</button>
+        </div>
+    </div>
+    <div class="side-panel">
+        <form id="book-form">
+            <div class="form-container">
+                <h3>New Book</h3>
+                <div class="input-container">
+                    <label for="title">Title</label>
+                    <input type="text" name="title" id="title" required>
+                </div>
+                <div class="input-container">
+                    <label for="author">Author</label>
+                    <input type="text" name="author" id="author" required>
+                </div>
+                <div class="input-container">
+                    <label for="pages">Pages</label>
+                    <input type="text" name="pages" id="pages" required>
+                </div>
+                <div class="input-container">
+                    <label for="checkbox">Read</label>
+                    <input type="checkbox" name="checkbox" id="checkbox">
+                </div>
+                <div id="button-container">
+                    <button type="submit" class="submit-btn book-button">Add book</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
