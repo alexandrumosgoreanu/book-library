@@ -72,7 +72,7 @@ class UI {
         setTimeout(()=>{books.forEach((book)=> {
             UI.addBookToLibrary(book); 
             Storage.addBook(book)});
-        }, 200);
+        }, 100);
     }
 
     static displayBooks() {
@@ -174,4 +174,21 @@ document.querySelector('#book-form').addEventListener('submit', (e) => {
     Storage.addBook(book);
 
     UI.clearFields();
+});
+
+
+// Side nav
+ 
+document.querySelector('#add-book').addEventListener('click', () => {
+    const sidePanel = document.querySelector(".side-panel")
+    sidePanel.style.width = "550px";
+    sidePanel.style.boxShadow = "-8px 2px 50px 24px #000000";
+    // document.getElementById("main").style.marginLeft = "250px";
+   // document.querySelector('html').classList.add('blured');
+});
+document.querySelector('.close-btn').addEventListener('click', () => {
+    const sidePanel = document.querySelector(".side-panel")
+    sidePanel.style.width = "0px";
+    sidePanel.style.boxShadow = "0px 0px 0px 0px";
+    //document.querySelector('html').classList.remove('blured');
 });
